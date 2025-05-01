@@ -13,8 +13,6 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
-
 public class ShakeSubsystem extends SubsystemBase {
 private final TalonFX topLevelShakePrimaryMotor;
 private final TalonFX bottomLevelShakePrimaryMotor;

@@ -1,21 +1,22 @@
 package frc.robot;
 
+import frc.robot.Constants.ShakeConstants;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command.InterruptionBehavior;
-
+import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 public class RobotContainer {
 
   private static RobotContainer m_robotContainer = new RobotContainer();
-
-    public final ShakeSubsystem m_shakeSubsystem = new ShakeSubsystem();
+  public final ShakeSubsystem m_shakeSubsystem = new ShakeSubsystem();
 
 // Joysticks
+  CommandGenericHID joystick = new CommandGenericHID(ShakeConstants.kJoystickPort);
 
   // A chooser for autonomous commands
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -28,8 +29,8 @@ public class RobotContainer {
 
 
     // SmartDashboard Buttons
-    SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-    SmartDashboard.putData("Shake", new Shake( m_shakeSubsystem ));
+    // SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
+    // SmartDashboard.putData("Shake", new Shake( m_shakeSubsystem ));
     // Configure the button bindings
     configureButtonBindings();
 
@@ -53,6 +54,38 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+
+    joystick.povUp().whileTrue(
+      new Shake(m_shakeSubsystem, "up")
+    );
+
+    joystick.povUpRight().whileTrue(
+      new Shake(m_shakeSubsystem, "upRight")
+    );
+
+    joystick.povRight().whileTrue(
+      new Shake(m_shakeSubsystem, "right")
+    );
+
+    joystick.povDownRight().whileTrue(
+      new Shake(m_shakeSubsystem, "downRight")
+    );
+
+    joystick.povDown().whileTrue(
+      new Shake(m_shakeSubsystem, "down")
+    );
+
+    joystick.povDownLeft().whileTrue(
+      new Shake(m_shakeSubsystem, "downLeft")
+    );
+
+    joystick.povLeft().whileTrue(
+      new Shake(m_shakeSubsystem, "left")
+    );
+
+    joystick.povUpLeft().whileTrue(
+      new Shake(m_shakeSubsystem, "upLeft")
+    );
 
   }
 

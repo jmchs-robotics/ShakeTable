@@ -26,6 +26,7 @@ public class Constants {
     public static final int bottomLevelShakePrimaryMotorID = 2;
     public static final int topLevelShakeFollowerMotorID = 3;
     public static final int bottomLevelShakeFollowerMotorID = 4;
+    public static final int kJoystickPort = 0;
     
    }
 }
