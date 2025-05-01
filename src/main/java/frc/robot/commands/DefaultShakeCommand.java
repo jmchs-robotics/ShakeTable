@@ -7,18 +7,18 @@ import java.util.function.DoubleSupplier;
 import frc.robot.subsystems.ShakeSubsystem;
 
 
-public class Shake extends Command {
+public class DefaultShakeCommand extends Command {
 
         private final ShakeSubsystem m_shake;
-        private final String position;
+        private final CommandGenericHID m_joystick;
 
-    public Shake(ShakeSubsystem shake, String pos) {
+    public DefaultShakeCommand(ShakeSubsystem shake, CommandGenericHID joystick) {
 
 
         m_shake = shake;
         addRequirements(m_shake);
 
-        position = pos;
+        m_joystick = joystick;
 
     }
 
@@ -29,33 +29,33 @@ public class Shake extends Command {
     @Override
     public void execute() {
 
-        if (position.equals("up")) {
+        if (m_joystick.getRawAxis(0) == 1.0) {
             m_shake.setTopLevelMotors(0.2);
         }
 
-        if (position.equals("upRight")) {
+        if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == 1.0) {
             m_shake.setTopLevelMotors(0.2);
             m_shake.setBottomLevelMotors(0.2);
         }
 
-        if (position.equals("right")) {
+        if (m_joystick.getRawAxis(1) == 1.0) {
             m_shake.setBottomLevelMotors(0.2);
         }
-        if (position.equals("downRight")) {
+        if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == 1.0) {
             m_shake.setTopLevelMotors(-0.2);
             m_shake.setBottomLevelMotors(0.2);
         }
-        if (position.equals("down")) {
+        if (m_joystick.getRawAxis(0) == -1.0) {
             m_shake.setTopLevelMotors(-0.2);
         }
-        if (position.equals("downLeft")) {
+        if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == -1.0) {
             m_shake.setTopLevelMotors(-0.2);
             m_shake.setBottomLevelMotors(-0.2);
         }
-        if (position.equals("left")) {
+        if (m_joystick.getRawAxis(1) == -1.0) {
             m_shake.setBottomLevelMotors(-0.2);
         }
-        if (position.equals("upLeft")) {
+        if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == -1.0) {
             m_shake.setTopLevelMotors(0.2);
             m_shake.setBottomLevelMotors(-0.2);
         }

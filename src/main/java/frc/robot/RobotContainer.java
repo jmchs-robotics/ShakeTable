@@ -33,14 +33,7 @@ public class RobotContainer {
     // SmartDashboard.putData("Shake", new Shake( m_shakeSubsystem ));
     // Configure the button bindings
     configureButtonBindings();
-
-    // Configure default commands
-
-    // Configure autonomous sendable chooser
-
-    m_chooser.setDefaultOption("Autonomous Command", new AutonomousCommand());
-
-    SmartDashboard.putData("Auto Mode", m_chooser);
+    m_shakeSubsystem.setDefaultCommand(new DefaultShakeCommand(m_shakeSubsystem, joystick));
   }
 
   public static RobotContainer getInstance() {
@@ -53,52 +46,12 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {
-
-    joystick.povUp().whileTrue(
-      new Shake(m_shakeSubsystem, "up")
-    );
-
-    joystick.povUpRight().whileTrue(
-      new Shake(m_shakeSubsystem, "upRight")
-    );
-
-    joystick.povRight().whileTrue(
-      new Shake(m_shakeSubsystem, "right")
-    );
-
-    joystick.povDownRight().whileTrue(
-      new Shake(m_shakeSubsystem, "downRight")
-    );
-
-    joystick.povDown().whileTrue(
-      new Shake(m_shakeSubsystem, "down")
-    );
-
-    joystick.povDownLeft().whileTrue(
-      new Shake(m_shakeSubsystem, "downLeft")
-    );
-
-    joystick.povLeft().whileTrue(
-      new Shake(m_shakeSubsystem, "left")
-    );
-
-    joystick.povUpLeft().whileTrue(
-      new Shake(m_shakeSubsystem, "upLeft")
-    );
-
-  }
+  private void configureButtonBindings() {}
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    * @return the command to run in autonomous
   */
-  public Command getAutonomousCommand() {
-    // The selected command will be run in autonomous
-    return m_chooser.getSelected();
-  }
-  
-
 }
 
