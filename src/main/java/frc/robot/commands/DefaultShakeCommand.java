@@ -3,6 +3,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 
 import java.util.function.DoubleSupplier;
+import java.util.function.Supplier;
 
 import frc.robot.Constants.ShakeConstants;
 import frc.robot.RobotContainer.Speed;
@@ -15,7 +16,7 @@ public class DefaultShakeCommand extends Command {
         private final CommandGenericHID m_joystick;
         private final Speed m_speed;
 
-    public DefaultShakeCommand(ShakeSubsystem shake, CommandGenericHID joystick, Speed speed) {
+    public DefaultShakeCommand(ShakeSubsystem shake, CommandGenericHID joystick, Supplier<Speed> speed) {
 
 
         m_shake = shake;
@@ -23,7 +24,7 @@ public class DefaultShakeCommand extends Command {
 
         m_joystick = joystick;
 
-        m_speed = speed;
+        m_speed = speed.get();
 
     }
 

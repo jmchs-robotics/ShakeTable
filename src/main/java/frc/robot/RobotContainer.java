@@ -35,7 +35,8 @@ public class RobotContainer {
     // Smartdashboard Subsystems
     // Configure the button bindings
     configureButtonBindings();
-    m_shakeSubsystem.setDefaultCommand(new DefaultShakeCommand(m_shakeSubsystem, joystick, speed));
+    m_shakeSubsystem.setDefaultCommand(new DefaultShakeCommand(m_shakeSubsystem, joystick, () -> speed));
+    setUpShakerTab();
   }
 
   public static RobotContainer getInstance() {
@@ -55,21 +56,21 @@ public class RobotContainer {
     ShuffleboardTab shakerTab = Shuffleboard.getTab("Shaker Tab");
 
      speeds[0] = shakerTab.add("low", true)
-     .withWidget(BuiltInWidgets.kBooleanBox)
-     .withSize(2, 2)
-     .withPosition(0, 0)
+     .withWidget(BuiltInWidgets.kToggleButton)
+     .withSize(3, 2)
+     .withPosition(1, 0)
      .getEntry();
 
      speeds[1] = shakerTab.add("medium", false)
-     .withWidget(BuiltInWidgets.kBooleanBox)
-     .withSize(2, 2)
-     .withPosition(2, 0)
+     .withWidget(BuiltInWidgets.kToggleButton)
+     .withSize(3, 2)
+     .withPosition(4, 0)
      .getEntry();
 
      speeds[2] = shakerTab.add("high", false)
-     .withWidget(BuiltInWidgets.kBooleanBox)
-     .withSize(2, 2)
-     .withPosition(4, 0)
+     .withWidget(BuiltInWidgets.kToggleButton)
+     .withSize(3, 2)
+     .withPosition(7, 0)
      .getEntry();
 
   }
