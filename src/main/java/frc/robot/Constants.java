@@ -28,6 +28,9 @@ public class Constants {
     public static final int bottomLevelShakeFollowerMotorID = 4;
     public static final int kJoystickPort = 0;
     
+    public static final double LOW_SPEED = 0.2;
+    public static final double MEDIUM_SPEED = 0.35;
+    public static final double HIGH_SPEED = 0.5;
    }
 }
 
