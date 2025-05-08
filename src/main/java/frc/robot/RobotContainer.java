@@ -80,11 +80,11 @@ public class RobotContainer {
     for (int i = 0 ; i < 3; i++) {
       if (speedBoolean[i]) {
         speeds[i].setBoolean(true);
+        setSpeed(i);
       } else {
         speeds[i].setBoolean(false);
       }
     }
-
   }
 
   public void decideSpeed() {
@@ -98,6 +98,16 @@ public class RobotContainer {
     } else if (speedBoolean[2]) {
       speed = Speed.HIGH_SPEED;
     }
+
+  }
+
+  private void setSpeed(int num) {
+
+    for (int i = 0; i < speedBoolean.length; i++) {
+      speedBoolean[i] = false;
+    }
+
+    speedBoolean[num] = true;
 
   }
 
