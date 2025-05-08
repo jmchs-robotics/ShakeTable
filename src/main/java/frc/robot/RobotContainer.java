@@ -77,12 +77,18 @@ public class RobotContainer {
 
   public void updateShakerTab() {
     
-    for (int i = 0 ; i < 3; i++) {
-      if (speedBoolean[i]) {
-        speeds[i].setBoolean(true);
-        setSpeed(i);
-      } else {
-        speeds[i].setBoolean(false);
+    for (int i = 0; i < 3; i++) {
+      if (speeds[i].getBoolean(false) != speedBoolean[i] & speeds[i].getBoolean(false)) {
+          speeds[0].setBoolean(false);
+          speedBoolean[0] = false;
+          speeds[1].setBoolean(false);
+          speedBoolean[1] = false;
+          speeds[2].setBoolean(false);
+          speedBoolean[2] = false;
+          speeds[i].setBoolean(true);
+          speedBoolean[i] = true;
+      } else if (speeds[i].getBoolean(false) != speedBoolean[i]) {
+          speedBoolean[i] = false;
       }
     }
   }
