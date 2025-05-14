@@ -37,7 +37,6 @@ public class RobotContainer {
     configureButtonBindings();
     m_shakeSubsystem.setDefaultCommand(new DefaultShakeCommand(m_shakeSubsystem, joystick, () -> speed));
     setUpShakerTab();
-    updateShakerTab();
   }
 
   public static RobotContainer getInstance() {

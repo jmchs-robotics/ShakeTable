@@ -26,8 +26,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
 
-    private Command m_autonomousCommand;
-
     private RobotContainer m_robotContainer;
 
     /**
@@ -56,6 +54,7 @@ public class Robot extends TimedRobot {
         // and running subsystem periodic() methods.  This must be called from the robot's periodic
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
+        m_robotContainer.updateShakerTab();
     }
 
 
