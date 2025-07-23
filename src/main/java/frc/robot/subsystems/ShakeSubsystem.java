@@ -16,16 +16,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class ShakeSubsystem extends SubsystemBase {
 private final TalonFX topLevelShakePrimaryMotor;
 private final TalonFX bottomLevelShakePrimaryMotor;
-private final TalonFX topLevelShakeFollowerMotor;
-private final TalonFX bottomLevelShakeFollowerMotor;
 private final TalonFXConfiguration config;
 
     public ShakeSubsystem() {
 
         topLevelShakePrimaryMotor = new TalonFX(ShakeConstants.topLevelShakePrimaryMotorID);
         bottomLevelShakePrimaryMotor = new TalonFX(ShakeConstants.bottomLevelShakePrimaryMotorID);
-        topLevelShakeFollowerMotor = new TalonFX(ShakeConstants.topLevelShakeFollowerMotorID);
-        bottomLevelShakeFollowerMotor = new TalonFX(ShakeConstants.bottomLevelShakeFollowerMotorID);
         config = new TalonFXConfiguration();
 
         config.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
@@ -34,12 +30,6 @@ private final TalonFXConfiguration config;
 
         topLevelShakePrimaryMotor.getConfigurator().apply(config);
         bottomLevelShakePrimaryMotor.getConfigurator().apply(config);
-        topLevelShakeFollowerMotor.getConfigurator().apply(config);
-        bottomLevelShakeFollowerMotor.getConfigurator().apply(config);
-
-        topLevelShakeFollowerMotor.setControl(new Follower(topLevelShakePrimaryMotor.getDeviceID(), true));
-        bottomLevelShakeFollowerMotor.setControl(new Follower(bottomLevelShakePrimaryMotor.getDeviceID(), true));
-
     }
 
     public void setTopLevelMotors(double speed) {

@@ -53,7 +53,7 @@ public class RobotContainer {
 
   private void setUpShakerTab() {
 
-    ShuffleboardTab shakerTab = Shuffleboard.getTab("Shaker Tab");
+     ShuffleboardTab shakerTab = Shuffleboard.getTab("Shaker Tab");
 
      speeds[0] = shakerTab.add("low", true)
      .withWidget(BuiltInWidgets.kToggleButton)
