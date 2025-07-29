@@ -2,7 +2,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 
-import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
 import frc.robot.Constants.ShakeConstants;
@@ -35,34 +34,40 @@ public class DefaultShakeCommand extends Command {
     @Override
     public void execute() {
 
+        if (m_joystick.getRawAxis(0) < 0.5)
+            m_shake.stopTopLevelMotors();
+
+        if (m_joystick.getRawAxis(1) < 0.5)
+            m_shake.stopBottomLevelMotors();
+
         if (m_speed == Speed.LOW_SPEED) {
             if (m_joystick.getRawAxis(0) == 1.0) {
                 m_shake.setTopLevelMotors(ShakeConstants.LOW_SPEED);
             }
 
-            if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == 1.0) {
+            else if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == 1.0) {
                 m_shake.setTopLevelMotors(ShakeConstants.LOW_SPEED);
                 m_shake.setBottomLevelMotors(ShakeConstants.LOW_SPEED);
             }
 
-            if (m_joystick.getRawAxis(1) == 1.0) {
+            else if (m_joystick.getRawAxis(1) == 1.0) {
                 m_shake.setBottomLevelMotors(ShakeConstants.LOW_SPEED);
             }
-            if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == 1.0) {
+            else if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == 1.0) {
                 m_shake.setTopLevelMotors(-ShakeConstants.LOW_SPEED);
                 m_shake.setBottomLevelMotors(ShakeConstants.LOW_SPEED);
             }
-            if (m_joystick.getRawAxis(0) == -1.0) {
+            else if (m_joystick.getRawAxis(0) == -1.0) {
                 m_shake.setTopLevelMotors(-ShakeConstants.LOW_SPEED);
             }
-            if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == -1.0) {
+            else if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == -1.0) {
                 m_shake.setTopLevelMotors(-ShakeConstants.LOW_SPEED);
                 m_shake.setBottomLevelMotors(-ShakeConstants.LOW_SPEED);
             }
-            if (m_joystick.getRawAxis(1) == -1.0) {
+            else if (m_joystick.getRawAxis(1) == -1.0) {
                 m_shake.setBottomLevelMotors(-ShakeConstants.LOW_SPEED);
             }
-            if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == -1.0) {
+            else if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == -1.0) {
                 m_shake.setTopLevelMotors(ShakeConstants.LOW_SPEED);
                 m_shake.setBottomLevelMotors(-ShakeConstants.LOW_SPEED);
             }
@@ -73,29 +78,29 @@ public class DefaultShakeCommand extends Command {
                 m_shake.setTopLevelMotors(ShakeConstants.MEDIUM_SPEED);
             }
 
-            if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == 1.0) {
+            else if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == 1.0) {
                 m_shake.setTopLevelMotors(ShakeConstants.MEDIUM_SPEED);
                 m_shake.setBottomLevelMotors(ShakeConstants.MEDIUM_SPEED);
             }
 
-            if (m_joystick.getRawAxis(1) == 1.0) {
+            else if (m_joystick.getRawAxis(1) == 1.0) {
                 m_shake.setBottomLevelMotors(ShakeConstants.MEDIUM_SPEED);
             }
-            if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == 1.0) {
+            else if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == 1.0) {
                 m_shake.setTopLevelMotors(-ShakeConstants.MEDIUM_SPEED);
                 m_shake.setBottomLevelMotors(ShakeConstants.MEDIUM_SPEED);
             }
-            if (m_joystick.getRawAxis(0) == -1.0) {
+            else if (m_joystick.getRawAxis(0) == -1.0) {
                 m_shake.setTopLevelMotors(-ShakeConstants.MEDIUM_SPEED);
             }
-            if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == -1.0) {
+            else if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == -1.0) {
                 m_shake.setTopLevelMotors(-ShakeConstants.MEDIUM_SPEED);
                 m_shake.setBottomLevelMotors(-ShakeConstants.MEDIUM_SPEED);
             }
-            if (m_joystick.getRawAxis(1) == -1.0) {
+            else if (m_joystick.getRawAxis(1) == -1.0) {
                 m_shake.setBottomLevelMotors(-ShakeConstants.MEDIUM_SPEED);
             }
-            if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == -1.0) {
+            else if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == -1.0) {
                 m_shake.setTopLevelMotors(ShakeConstants.MEDIUM_SPEED);
                 m_shake.setBottomLevelMotors(-ShakeConstants.MEDIUM_SPEED);
             }
@@ -106,29 +111,29 @@ public class DefaultShakeCommand extends Command {
                 m_shake.setTopLevelMotors(ShakeConstants.HIGH_SPEED);
             }
 
-            if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == 1.0) {
+            else if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == 1.0) {
                 m_shake.setTopLevelMotors(ShakeConstants.HIGH_SPEED);
                 m_shake.setBottomLevelMotors(ShakeConstants.HIGH_SPEED);
             }
 
-            if (m_joystick.getRawAxis(1) == 1.0) {
+            else if (m_joystick.getRawAxis(1) == 1.0) {
                 m_shake.setBottomLevelMotors(ShakeConstants.HIGH_SPEED);
             }
-            if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == 1.0) {
+            else if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == 1.0) {
                 m_shake.setTopLevelMotors(-ShakeConstants.HIGH_SPEED);
                 m_shake.setBottomLevelMotors(ShakeConstants.HIGH_SPEED);
             }
-            if (m_joystick.getRawAxis(0) == -1.0) {
+            else if (m_joystick.getRawAxis(0) == -1.0) {
                 m_shake.setTopLevelMotors(-ShakeConstants.HIGH_SPEED);
             }
-            if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == -1.0) {
+            else if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == -1.0) {
                 m_shake.setTopLevelMotors(-ShakeConstants.HIGH_SPEED);
                 m_shake.setBottomLevelMotors(-ShakeConstants.HIGH_SPEED);
             }
-            if (m_joystick.getRawAxis(1) == -1.0) {
+            else if (m_joystick.getRawAxis(1) == -1.0) {
                 m_shake.setBottomLevelMotors(-ShakeConstants.HIGH_SPEED);
             }
-            if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == -1.0) {
+            else if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == -1.0) {
                 m_shake.setTopLevelMotors(ShakeConstants.HIGH_SPEED);
                 m_shake.setBottomLevelMotors(-ShakeConstants.HIGH_SPEED);
             }
@@ -149,4 +154,4 @@ public class DefaultShakeCommand extends Command {
     public boolean runsWhenDisabled() {
         return false;
     }
-}
+} 

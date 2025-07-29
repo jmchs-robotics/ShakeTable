@@ -9,16 +9,10 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command.InterruptionBehavior;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 public class RobotContainer {
 
-  private static RobotContainer m_robotContainer = new RobotContainer();
   public final ShakeSubsystem m_shakeSubsystem = new ShakeSubsystem();
 
 // Joysticks
@@ -27,20 +21,17 @@ public class RobotContainer {
   private final GenericEntry[] speeds = new GenericEntry[3];
   private static final boolean[] speedBoolean = {true, false, false};
 
-  public static Speed speed = Speed.LOW_SPEED;
+  public Speed speed = Speed.LOW_SPEED;
   /**
   * The container for the robot.  Contains subsystems, OI devices, and commands.
   */
-  private RobotContainer() {
+  public RobotContainer() {
     // Smartdashboard Subsystems
     // Configure the button bindings
     configureButtonBindings();
     m_shakeSubsystem.setDefaultCommand(new DefaultShakeCommand(m_shakeSubsystem, joystick, () -> speed));
     setUpShakerTab();
-  }
-
-  public static RobotContainer getInstance() {
-    return m_robotContainer;
+    decideSpeed();
   }
 
   /**
@@ -72,6 +63,11 @@ public class RobotContainer {
      .withSize(3, 2)
      .withPosition(7, 0)
      .getEntry();
+
+     shakerTab.add("output", speed.toString())
+     .withWidget(BuiltInWidgets.kTextView)
+     .withSize(1, 1)
+     .withPosition(0, 0);
 
   }
 
@@ -106,16 +102,6 @@ public class RobotContainer {
     }
 
   }
-
-  // private void setSpeed(int num) {
-
-  //   for (int i = 0; i < speedBoolean.length; i++) {
-  //     speedBoolean[i] = false;
-  //   }
-
-  //   speedBoolean[num] = true;
-
-  // }
   
   public enum Speed {
     LOW_SPEED,
