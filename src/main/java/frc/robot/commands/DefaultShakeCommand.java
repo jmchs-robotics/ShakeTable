@@ -2,7 +2,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 
-import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
 import frc.robot.Constants.ShakeConstants;
@@ -37,6 +36,12 @@ public class DefaultShakeCommand extends Command {
 
     @Override
     public void execute() {
+
+        if (m_joystick.getRawAxis(0) < 0.5)
+            m_shake.stopTopLevelMotors();
+
+        if (m_joystick.getRawAxis(1) < 0.5)
+            m_shake.stopBottomLevelMotors();
 
         if (m_speed == Speed.LOW_SPEED) {
 
@@ -129,4 +134,4 @@ public class DefaultShakeCommand extends Command {
     public boolean runsWhenDisabled() {
         return false;
     }
-}
+} 
