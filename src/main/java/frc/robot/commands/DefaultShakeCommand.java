@@ -37,10 +37,10 @@ public class DefaultShakeCommand extends Command {
     @Override
     public void execute() {
 
-        if (m_joystick.getRawAxis(0) < 0.5)
+        if (yDirection < 0.5)
             m_shake.stopTopLevelMotors();
 
-        if (m_joystick.getRawAxis(1) < 0.5)
+        if (yDirection < 0.5)
             m_shake.stopBottomLevelMotors();
 
         if (m_speed == Speed.LOW_SPEED) {
@@ -48,7 +48,7 @@ public class DefaultShakeCommand extends Command {
             if (yDirection == 1.0) {
                 m_shake.setBottomLevelMotors(ShakeConstants.LOW_SPEED);
             }
-            if (yDirection == -1.0) {
+            else if (yDirection == -1.0) {
                 m_shake.setBottomLevelMotors(-ShakeConstants.LOW_SPEED);
             }
         }
