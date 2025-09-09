@@ -15,6 +15,7 @@ public class DefaultShakeCommand extends Command {
         private final ShakeSubsystem m_shake;
         private final CommandGenericHID m_joystick;
         private final Speed m_speed;
+        private double yDirection;
 
     public DefaultShakeCommand(ShakeSubsystem shake, CommandGenericHID joystick, Supplier<Speed> speed) {
 
@@ -26,6 +27,8 @@ public class DefaultShakeCommand extends Command {
 
         m_speed = speed.get();
 
+        yDirection = m_joystick.getRawAxis(1);
+
     }
 
     @Override
@@ -36,103 +39,80 @@ public class DefaultShakeCommand extends Command {
     public void execute() {
 
         if (m_speed == Speed.LOW_SPEED) {
-            if (m_joystick.getRawAxis(0) == 1.0) {
-                m_shake.setTopLevelMotors(ShakeConstants.LOW_SPEED);
-            }
 
-            if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == 1.0) {
-                m_shake.setTopLevelMotors(ShakeConstants.LOW_SPEED);
+            if (yDirection == 1.0) {
                 m_shake.setBottomLevelMotors(ShakeConstants.LOW_SPEED);
             }
-
-            if (m_joystick.getRawAxis(1) == 1.0) {
-                m_shake.setBottomLevelMotors(ShakeConstants.LOW_SPEED);
-            }
-            if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == 1.0) {
-                m_shake.setTopLevelMotors(-ShakeConstants.LOW_SPEED);
-                m_shake.setBottomLevelMotors(ShakeConstants.LOW_SPEED);
-            }
-            if (m_joystick.getRawAxis(0) == -1.0) {
-                m_shake.setTopLevelMotors(-ShakeConstants.LOW_SPEED);
-            }
-            if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == -1.0) {
-                m_shake.setTopLevelMotors(-ShakeConstants.LOW_SPEED);
-                m_shake.setBottomLevelMotors(-ShakeConstants.LOW_SPEED);
-            }
-            if (m_joystick.getRawAxis(1) == -1.0) {
-                m_shake.setBottomLevelMotors(-ShakeConstants.LOW_SPEED);
-            }
-            if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == -1.0) {
-                m_shake.setTopLevelMotors(ShakeConstants.LOW_SPEED);
+            if (yDirection == -1.0) {
                 m_shake.setBottomLevelMotors(-ShakeConstants.LOW_SPEED);
             }
         }
 
-        if (m_speed == Speed.MEDIUM_SPEED) {
-            if (m_joystick.getRawAxis(0) == 1.0) {
-                m_shake.setTopLevelMotors(ShakeConstants.MEDIUM_SPEED);
-            }
+        // if (m_speed == Speed.MEDIUM_SPEED) {
+        //     if (m_joystick.getRawAxis(0) == 1.0) {
+        //         m_shake.setTopLevelMotors(ShakeConstants.MEDIUM_SPEED);
+        //     }
 
-            if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == 1.0) {
-                m_shake.setTopLevelMotors(ShakeConstants.MEDIUM_SPEED);
-                m_shake.setBottomLevelMotors(ShakeConstants.MEDIUM_SPEED);
-            }
+        //     if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == 1.0) {
+        //         m_shake.setTopLevelMotors(ShakeConstants.MEDIUM_SPEED);
+        //         m_shake.setBottomLevelMotors(ShakeConstants.MEDIUM_SPEED);
+        //     }
 
-            if (m_joystick.getRawAxis(1) == 1.0) {
-                m_shake.setBottomLevelMotors(ShakeConstants.MEDIUM_SPEED);
-            }
-            if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == 1.0) {
-                m_shake.setTopLevelMotors(-ShakeConstants.MEDIUM_SPEED);
-                m_shake.setBottomLevelMotors(ShakeConstants.MEDIUM_SPEED);
-            }
-            if (m_joystick.getRawAxis(0) == -1.0) {
-                m_shake.setTopLevelMotors(-ShakeConstants.MEDIUM_SPEED);
-            }
-            if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == -1.0) {
-                m_shake.setTopLevelMotors(-ShakeConstants.MEDIUM_SPEED);
-                m_shake.setBottomLevelMotors(-ShakeConstants.MEDIUM_SPEED);
-            }
-            if (m_joystick.getRawAxis(1) == -1.0) {
-                m_shake.setBottomLevelMotors(-ShakeConstants.MEDIUM_SPEED);
-            }
-            if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == -1.0) {
-                m_shake.setTopLevelMotors(ShakeConstants.MEDIUM_SPEED);
-                m_shake.setBottomLevelMotors(-ShakeConstants.MEDIUM_SPEED);
-            }
-        }
+        //     if (m_joystick.getRawAxis(1) == 1.0) {
+        //         m_shake.setBottomLevelMotors(ShakeConstants.MEDIUM_SPEED);
+        //     }
+        //     if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == 1.0) {
+        //         m_shake.setTopLevelMotors(-ShakeConstants.MEDIUM_SPEED);
+        //         m_shake.setBottomLevelMotors(ShakeConstants.MEDIUM_SPEED);
+        //     }
+        //     if (m_joystick.getRawAxis(0) == -1.0) {
+        //         m_shake.setTopLevelMotors(-ShakeConstants.MEDIUM_SPEED);
+        //     }
+        //     if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == -1.0) {
+        //         m_shake.setTopLevelMotors(-ShakeConstants.MEDIUM_SPEED);
+        //         m_shake.setBottomLevelMotors(-ShakeConstants.MEDIUM_SPEED);
+        //     }
+        //     if (m_joystick.getRawAxis(1) == -1.0) {
+        //         m_shake.setBottomLevelMotors(-ShakeConstants.MEDIUM_SPEED);
+        //     }
+        //     if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == -1.0) {
+        //         m_shake.setTopLevelMotors(ShakeConstants.MEDIUM_SPEED);
+        //         m_shake.setBottomLevelMotors(-ShakeConstants.MEDIUM_SPEED);
+        //     }
+        // }
 
-        if (m_speed == Speed.HIGH_SPEED) {
-            if (m_joystick.getRawAxis(0) == 1.0) {
-                m_shake.setTopLevelMotors(ShakeConstants.HIGH_SPEED);
-            }
+        // if (m_speed == Speed.HIGH_SPEED) {
+        //     if (m_joystick.getRawAxis(0) == 1.0) {
+        //         m_shake.setTopLevelMotors(ShakeConstants.HIGH_SPEED);
+        //     }
 
-            if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == 1.0) {
-                m_shake.setTopLevelMotors(ShakeConstants.HIGH_SPEED);
-                m_shake.setBottomLevelMotors(ShakeConstants.HIGH_SPEED);
-            }
+        //     if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == 1.0) {
+        //         m_shake.setTopLevelMotors(ShakeConstants.HIGH_SPEED);
+        //         m_shake.setBottomLevelMotors(ShakeConstants.HIGH_SPEED);
+        //     }
 
-            if (m_joystick.getRawAxis(1) == 1.0) {
-                m_shake.setBottomLevelMotors(ShakeConstants.HIGH_SPEED);
-            }
-            if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == 1.0) {
-                m_shake.setTopLevelMotors(-ShakeConstants.HIGH_SPEED);
-                m_shake.setBottomLevelMotors(ShakeConstants.HIGH_SPEED);
-            }
-            if (m_joystick.getRawAxis(0) == -1.0) {
-                m_shake.setTopLevelMotors(-ShakeConstants.HIGH_SPEED);
-            }
-            if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == -1.0) {
-                m_shake.setTopLevelMotors(-ShakeConstants.HIGH_SPEED);
-                m_shake.setBottomLevelMotors(-ShakeConstants.HIGH_SPEED);
-            }
-            if (m_joystick.getRawAxis(1) == -1.0) {
-                m_shake.setBottomLevelMotors(-ShakeConstants.HIGH_SPEED);
-            }
-            if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == -1.0) {
-                m_shake.setTopLevelMotors(ShakeConstants.HIGH_SPEED);
-                m_shake.setBottomLevelMotors(-ShakeConstants.HIGH_SPEED);
-            }
-        }
+        //     if (m_joystick.getRawAxis(1) == 1.0) {
+        //         m_shake.setBottomLevelMotors(ShakeConstants.HIGH_SPEED);
+        //     }
+        //     if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == 1.0) {
+        //         m_shake.setTopLevelMotors(-ShakeConstants.HIGH_SPEED);
+        //         m_shake.setBottomLevelMotors(ShakeConstants.HIGH_SPEED);
+        //     }
+        //     if (m_joystick.getRawAxis(0) == -1.0) {
+        //         m_shake.setTopLevelMotors(-ShakeConstants.HIGH_SPEED);
+        //     }
+        //     if (m_joystick.getRawAxis(0) == -1.0 && m_joystick.getRawAxis(1) == -1.0) {
+        //         m_shake.setTopLevelMotors(-ShakeConstants.HIGH_SPEED);
+        //         m_shake.setBottomLevelMotors(-ShakeConstants.HIGH_SPEED);
+        //     }
+        //     if (m_joystick.getRawAxis(1) == -1.0) {
+        //         m_shake.setBottomLevelMotors(-ShakeConstants.HIGH_SPEED);
+        //     }
+        //     if (m_joystick.getRawAxis(0) == 1.0 && m_joystick.getRawAxis(1) == -1.0) {
+        //         m_shake.setTopLevelMotors(ShakeConstants.HIGH_SPEED);
+        //         m_shake.setBottomLevelMotors(-ShakeConstants.HIGH_SPEED);
+        //     }
+        // }
 
     }
 
