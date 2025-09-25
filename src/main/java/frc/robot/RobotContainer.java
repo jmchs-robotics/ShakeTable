@@ -21,7 +21,7 @@ public class RobotContainer {
   private final GenericEntry[] speeds = new GenericEntry[3];
   private static final boolean[] speedBoolean = {true, false, false};
 
-  public Speed speed = Speed.LOW_SPEED;
+  public double speed = ShakeConstants.lowSpeed;
   /**
   * The container for the robot.  Contains subsystems, OI devices, and commands.
   */
@@ -29,7 +29,7 @@ public class RobotContainer {
     // Smartdashboard Subsystems
     // Configure the button bindings
     configureButtonBindings();
-    m_shakeSubsystem.setDefaultCommand(new DefaultShakeCommand(m_shakeSubsystem, joystick, () -> speed));
+    m_shakeSubsystem.setDefaultCommand(new DefaultShakeCommand(m_shakeSubsystem, joystick, speed));
     setUpShakerTab();
   }
 
@@ -63,7 +63,7 @@ public class RobotContainer {
      .withPosition(7, 0)
      .getEntry();
 
-     shakerTab.add("output", speed.toString())
+     shakerTab.add("output", toString())
      .withWidget(BuiltInWidgets.kTextView)
      .withSize(1, 1)
      .withPosition(0, 0);
@@ -94,19 +94,13 @@ public class RobotContainer {
   public void decideSpeed() {
 
     if (speedBoolean[0]) {
-      speed = Speed.LOW_SPEED;
+      speed = ShakeConstants.lowSpeed;
     } else if (speedBoolean[1]) {
-      speed = Speed.MEDIUM_SPEED;
+      speed = ShakeConstants.mediumSpeed;
     } else if (speedBoolean[2]) {
-      speed = Speed.HIGH_SPEED;
+      speed = ShakeConstants.highSpeed;
     }
 
-  }
-  
-  public enum Speed {
-    LOW_SPEED,
-    MEDIUM_SPEED,
-    HIGH_SPEED
   }
 
 }

@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import java.util.function.Supplier;
 
 import frc.robot.Constants.ShakeConstants;
-import frc.robot.RobotContainer.Speed;
 import frc.robot.subsystems.ShakeSubsystem;
 
 
@@ -13,10 +12,10 @@ public class DefaultShakeCommand extends Command {
 
         private final ShakeSubsystem m_shake;
         private final CommandGenericHID m_joystick;
-        private final Speed m_speed;
+        private final double m_speed;
         private double yDirection;
 
-    public DefaultShakeCommand(ShakeSubsystem shake, CommandGenericHID joystick, Supplier<Speed> speed) {
+    public DefaultShakeCommand(ShakeSubsystem shake, CommandGenericHID joystick, double speed) {
 
 
         m_shake = shake;
@@ -24,7 +23,7 @@ public class DefaultShakeCommand extends Command {
 
         m_joystick = joystick;
 
-        m_speed = speed.get();
+        m_speed = speed;
 
         yDirection = m_joystick.getRawAxis(1);
 
@@ -37,22 +36,20 @@ public class DefaultShakeCommand extends Command {
     @Override
     public void execute() {
 
-        if (yDirection < 0.5)
-            m_shake.stopTopLevelMotors();
+        // if (yDirection < 0.5 && yDirection > -0.5)
+        //     m_shake.stopBottomLevelMotors();
 
-        if (yDirection < 0.5)
-            m_shake.stopBottomLevelMotors();
 
-        if (m_speed == Speed.LOW_SPEED) {
+        // else if (yDirection > 0.5) {
+        //     m_shake.setBottomLevelMotors(m_speed);
+        //     }
+            
+        // else if (yDirection < -0.5) {
+        //     m_shake.setBottomLevelMotors(-m_speed);
+        // }
 
-            if (yDirection == 1.0) {
-                m_shake.setBottomLevelMotors(ShakeConstants.LOW_SPEED);
-            }
-            else if (yDirection == -1.0) {
-                m_shake.setBottomLevelMotors(-ShakeConstants.LOW_SPEED);
-            }
-        }
-
+        m_shake.setBottomLevelMotors(m_joystick.getRawAxis(1) * m_speed);
+ 
         // if (m_speed == Speed.MEDIUM_SPEED) {
         //     if (m_joystick.getRawAxis(0) == 1.0) {
         //         m_shake.setTopLevelMotors(ShakeConstants.MEDIUM_SPEED);
